@@ -1,10 +1,22 @@
 {
-  "name": "expressjs",
+  "name": "express-czat",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index"
+    "prestart": "npm run clean",
+    "start": "NODE_ENV=development webpack-dev-server --content-base src/ --open --hot",
+    "prebuild": "npm run clean",
+    "build": "NODE_ENV=production webpack --mode production",
+    "clean": "rimraf dist build",
+    "clean:css": "rimraf src/css",
+    "project": "npm-run-all project:*",
+    "project:clean": "rimraf src",
+    "project:main-dir": "mkdir -p src",
+    "project:dirs": "mkdir -p src/sass src/app src/images",
+    "project:files": "touch src/README.md src/index.html src/sass/main.scss src/app/index.js",
+    "project:git": "git init",
+    "project:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore"
   },
   "keywords": [],
   "author": "Krzysztof Piekarz",
