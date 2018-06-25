@@ -9,11 +9,10 @@ const prodMode = process.env.NODE_ENV === 'production'; // eslint-disable-line
 
 const plugins = [
     new HtmlWebpackPlugin({
-        template: './src/index.html',
-        filename: devMode ? 'index.html' : '../index.html'
+        template: './client/index.html',
     }),
     new MiniCssExtractPlugin({
-        filename: devMode ? '[name].css' : '../css/[name].min.css',
+        filename: '[name].css',
         chunkFilename: '[id].css'
     })
 ];
@@ -27,10 +26,10 @@ if (prodMode) {
 }
 
 module.exports = {
-    entry: path.resolve(__dirname, 'src') + '/app/index.js', // eslint-disable-line
+    entry: path.resolve(__dirname, 'client') + '/index.js', // eslint-disable-line
     output: {
-        path: path.resolve(__dirname, 'build/js'), // eslint-disable-line
-        filename: 'index.bundled.js'
+        path: path.resolve(__dirname, 'public'), // eslint-disable-line
+        filename: 'bundled.js'
     },
     mode: process.env.NODE_ENV, // eslint-disable-line
     optimization: {
@@ -48,7 +47,7 @@ module.exports = {
         rules: [
             {
                 test: /\.jsx?$/,
-                include: path.resolve(__dirname, 'src'), // eslint-disable-line
+                include: path.resolve(__dirname, 'client'), // eslint-disable-line
                 exclude: /node_modules/,
                 loader: 'babel-loader',
             },
